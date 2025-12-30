@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>护持项目收集表 - 手机版</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-size: 15px;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8f4fd;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .exchange-rate {
+            margin-top: 5px;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 5px 10px;
+            background-color: #fff5f5;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        
+        .instructions {
+            background-color: #f0f7ff;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+        }
+        
+        .instructions h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructions h3 i {
+            margin-right: 8px;
+        }
+        
+        .instructions p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        /* 竖向表单样式 */
+        .form-container {
+            margin-bottom: 25px;
+        }
+        
+        .form-card {
+            background-color: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .form-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .form-card-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            margin-bottom: 18px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        .form-label.required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background-color: #fff;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+        
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.4;
+        }
+        
+        select.form-input {
+            height: 46px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .amount-display {
+            padding: 12px 14px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .rmb-display {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 6px;
+            padding-left: 2px;
+        }
+        
+        /* 按钮样式 */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 16px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover, .btn-primary:active {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-success:hover, .btn-success:active {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover, .btn-danger:active {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover, .btn-secondary:active {
+            background-color: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-warning:hover, .btn-warning:active {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+        
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover, .btn-info:active {
+            background-color: #138496;
+            transform: translateY(-2px);
+        }
+        
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* 操作按钮组 */
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e8f4fd;
+        }
+        
+        /* 数据统计 */
+        .data-summary {
+            background-color: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .data-summary h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .data-summary h4 i {
+            margin-right: 8px;
+        }
+        
+        .data-summary p {
+            margin-bottom: 10px;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .data-summary .label {
+            color: #7f8c8d;
+        }
+        
+        .data-summary .value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* 服务器状态 */
+        .server-status {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid transparent;
+        }
+        
+        .status-connected {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        
+        .status-disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .status-connecting {
+            background-color: #fff3cd;
+            color: #856404;
+            border-color: #ffeaa7;
+        }
+        
+        /* 配置面板 */
+        .config-panel {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6c757d;
+        }
+        
+        .config-panel h3 {
+            color: #495057;
+            margin-bottom: 12px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .config-panel h3 i {
+            margin-right: 8px;
+        }
+        
+        .config-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .config-input input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        
+        .config-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .config-buttons .btn {
+            padding: 12px;
+            font-size: 15px;
+        }
+        
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #7f8c8d;
+            line-height: 1;
+        }
+        
+        .close-modal:hover, .close-modal:active {
+            color: #e74c3c;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        /* 日志面板 */
+        .log-panel {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .log-panel h4 {
+            color: #495057;
+            margin-bottom: 12px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .log-panel h4 i {
+            margin-right: 8px;
+        }
+        
+        .log-entry {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        
+        .log-success {
+            color: #28a745;
+        }
+        
+        .log-error {
+            color: #dc3545;
+        }
+        
+        .log-info {
+            color: #17a2b8;
+        }
+        
+        .log-warning {
+            color: #ffc107;
+        }
+        
+        /* 同步状态 */
+        .sync-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 删除按钮 */
+        .delete-card-btn {
+            background-color: #fff5f5;
+            color: #e74c3c;
+            border: 1px solid #ffcdd2;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .delete-card-btn:hover, .delete-card-btn:active {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        /* 空状态提示 */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #95a5a6;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #bdc3c7;
+        }
+        
+        .empty-state p {
+            font-size: 16px;
+        }
+        
+        /* 提示信息 */
+        .hint {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+        
+        /* 响应式调整 */
+        @media (min-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 25px;
+            }
+            
+            .actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .actions .btn {
+                flex: 1;
+                min-width: calc(50% - 6px);
+            }
+            
+            .footer-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .footer-actions .btn {
+                flex: 1;
+                min-width: calc(50% - 6px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                max-width: 768px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 30px;
+            }
+        }
+        
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>护持项目收集表</h1>
+            <p class="subtitle">手机专用版 - 竖向填写更方便</p>
+            <p class="exchange-rate">汇率: 1人民币 ≈ 4.2新台币</p>
+            <div id="serverStatus" class="server-status status-disconnected">
+                <i class="fas fa-server"></i> 服务器: 未连接
+            </div>
+        </header>
+        
+        <!-- 服务器配置面板 -->
+        <div class="config-panel" id="configPanel">
+            <h3><i class="fas fa-cog"></i> 服务器设置</h3>
+            <div class="config-input">
+                <input type="text" id="serverUrl" placeholder="服务器地址 (例如:https://donation-collection-system.onrender.com)">
+                <div class="config-buttons">
+                    <button id="testConnection" class="btn btn-warning">
+                        <i class="fas fa-plug"></i> 测试连接
+                    </button>
+                    <button id="showConfig" class="btn btn-info">
+                        <i class="fas fa-sliders-h"></i> 高级设置
+                    </button>
+                </div>
+            </div>
+            <div id="connectionInfo" style="font-size: 13px; color: #6c757d; margin-top: 8px;"></div>
+        </div>
+        
+        <!-- 操作日志面板 -->
+        <div class="log-panel" id="logPanel">
+            <h4><i class="fas fa-clipboard-list"></i> 操作日志</h4>
+            <div id="logContent">
+                <div class="log-entry log-info">系统初始化完成</div>
+                <div class="log-entry log-info">等待连接服务器...</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+            <p>1. 填写姓名并选择护持项目后，系统会自动填充对应的祈福方式和护持金额</p>
+            <p>2. 点击"+"按钮可以添加新行，点击"×"按钮可以删除当前行</p>
+            <p>3. 填写祈福内容后，可以保存数据到本地浏览器或提交到服务器</p>
+            <p>4. 新台币与人民币的汇率按4.2:1计算</p>
+            <p>5. 首次使用请配置服务器地址，然后点击"测试连接"</p>
+        </div>
+        
+        <div class="actions">
+            <button id="addRow" class="btn btn-primary">
+                <i class="fas fa-plus"></i> 添加记录
+            </button>
+            <button id="saveData" class="btn btn-success">
+                <i class="fas fa-save"></i> 保存到本地
+            </button>
+            <button id="syncData" class="btn btn-info" disabled>
+                <i class="fas fa-sync-alt"></i> 同步到服务器
+            </button>
+        </div>
+        
+        <!-- 竖向表单容器 -->
+        <div class="form-container" id="formContainer">
+            <!-- 表单卡片将通过JavaScript动态生成 -->
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-clipboard-list"></i>
+                <p>暂无记录，点击上方"添加记录"按钮开始填写</p>
+            </div>
+        </div>
+        
+        <div class="footer-actions">
+            <button id="exportCSV" class="btn btn-secondary">
+                <i class="fas fa-file-csv"></i> 导出CSV
+            </button>
+            <button id="loadData" class="btn btn-secondary">
+                <i class="fas fa-folder-open"></i> 加载本地数据
+            </button>
+            <button id="submitAll" class="btn btn-warning" disabled>
+                <i class="fas fa-cloud-upload-alt"></i> 提交所有数据
+            </button>
+            <button id="clearAll" class="btn btn-danger">
+                <i class="fas fa-trash"></i> 清空所有
+            </button>
+        </div>
+        
+        <div class="data-summary">
+            <h4><i class="fas fa-chart-bar"></i> 数据统计</h4>
+            <p><span class="label">总记录数:</span> <span class="value" id="totalRecords">0</span> 条</p>
+            <p><span class="label">总护持金额(新台币):</span> <span class="value" id="totalAmountTWD">0</span></p>
+            <p><span class="label">总护持金额(人民币):</span> <span class="value" id="totalAmountRMB">0</span></p>
+            <p><span class="label">服务器同步状态:</span> <span class="value" id="syncStatus">未同步</span></p>
+            <div id="syncDetails" class="sync-status"></div>
+        </div>
+    </div>
+    
+    <!-- 配置模态框 -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-cogs"></i> 高级配置</div>
+                <div class="close-modal" id="closeModal">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">API端点配置:</label>
+                    <input type="text" id="apiSubmit" class="form-input" placeholder="提交数据API端点" value="/api/donations">
+                    <div class="hint">用于提交数据的API路径</div>
+                </div>
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">请求超时时间(秒):</label>
+                    <input type="number" id="timeout" class="form-input" placeholder="请求超时时间" value="30" min="5" max="120">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">请求重试次数:</label>
+                    <input type="number" id="retryCount" class="form-input" placeholder="重试次数" value="3" min="0" max="10">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveConfig" class="btn btn-success">保存配置</button>
+                <button id="cancelConfig" class="btn btn-secondary">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 汇率设置
+        const EXCHANGE_RATE = 4.2;
+        
+        // 自动识别当前页面地址作为API Base URL
+        const autoDetectServerUrl = () => {
+            return window.location.origin;
+        };
+
+        // 服务器配置（可从本地存储加载）
+        let serverConfig = {
+            serverUrl: autoDetectServerUrl(),
+            apiEndpoints: {
+                submit: '/api/donations',
+                test: '/api/test',
+                stats: '/api/stats'
+            },
+            timeout: 30, // 秒
+            retryCount: 3
+        };
+        
+        // 服务器状态
+        let serverConnected = false;
+        let syncInProgress = false;
+        
+        // 操作日志
+        let operationLogs = [];
+        
+        // 护持项目数据定义
+        const projectData = {
+            "供灯祈福(总功德主)": {
+                method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 三盏\n3.附 常年光明灯 三盏",
+                amount: "300000"
+            },
+            "供灯祈福(副总功德主)": {
+                method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 二盏\n3.附 常年光明灯 二盏",
+                amount: "80000"
+            },
+            "供灯祈福(圆满功德主)": {
+                method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 一盏\n3.附 常年光明灯 一盏",
+                amount: "50000"
+            },
+            "供灯祈福(阖家福慧功德主)": {
+                method: "1.供灯祈福共修 (七天)\n2.附 常年光明灯 一盏",
+                amount: "8000"
+            },
+            "供灯祈福(个人福慧功德主)": {
+                method: "1.供灯祈福共修 (七天)\n2.附 常年光明灯 一盏",
+                amount: "6000"
+            },
+            "常年光明灯（阖家光明灯功德主）": {
+                method: "佛龛供灯一年",
+                amount: "1000"
+            },
+            "常年光明灯(个人光明灯功德主)": {
+                method: "佛龛供灯一年",
+                amount: "600"
+            },
+            "新春祈福单(随喜功德主)": {
+                method: "祈福共修 (三天)",
+                amount: "随喜"
+            }
+        };
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadConfig();
+            initializeForms();
+            updateSummary();
+            setupEventListeners();
+            testServerConnection();
+            
+            // 检查是否有保存的数据
+            checkSavedData();
+        });
+        
+        // 检查是否有保存的数据
+        function checkSavedData() {
+            const savedData = localStorage.getItem('donationDataMobile');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    if (data.length > 0) {
+                        addLog(`检测到 ${data.length} 条保存的数据`, 'info');
+                    }
+                } catch (e) {
+                    // 忽略错误
+                }
+            }
+        }
+        
+        // 加载配置
+        function loadConfig() {
+            // 自动识别当前URL作为默认服务器地址
+            const detectedUrl = autoDetectServerUrl();
+            
+            const savedConfig = localStorage.getItem('donationServerConfigMobile');
+            if (savedConfig) {
+                try {
+                    const parsedConfig = JSON.parse(savedConfig);
+                    serverConfig = { ...serverConfig, ...parsedConfig };
+                    addLog('配置已从本地存储加载', 'info');
+                } catch (e) {
+                    addLog('加载配置时出错，使用默认配置', 'error');
+                    serverConfig.serverUrl = detectedUrl;
+                }
+            } else {
+                // 首次使用，自动设置为当前页面URL
+                serverConfig.serverUrl = detectedUrl;
+            }
+            
+            // 更新输入框值
+            document.getElementById('serverUrl').value = serverConfig.serverUrl;
+            document.getElementById('apiSubmit').value = serverConfig.apiEndpoints.submit || '/api/donations';
+            document.getElementById('timeout').value = serverConfig.timeout || 30;
+            document.getElementById('retryCount').value = serverConfig.retryCount || 3;
+        }
+        
+        // 保存配置
+        function saveConfig() {
+            serverConfig.serverUrl = document.getElementById('serverUrl').value.trim();
+            serverConfig.apiEndpoints.submit = document.getElementById('apiSubmit').value.trim() || '/api/donations';
+            serverConfig.timeout = parseInt(document.getElementById('timeout').value) || 30;
+            serverConfig.retryCount = parseInt(document.getElementById('retryCount').value) || 3;
+            
+            try {
+                localStorage.setItem('donationServerConfigMobile', JSON.stringify(serverConfig));
+                addLog('配置已保存', 'success');
+            } catch (e) {
+                addLog('保存配置时出错: ' + e.message, 'error');
+            }
+            
+            hideModal();
+            
+            // 重新测试连接
+            testServerConnection();
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 原有按钮事件
+            document.getElementById('addRow').addEventListener('click', addNewForm);
+            document.getElementById('saveData').addEventListener('click', saveToLocalStorage);
+            document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+            document.getElementById('loadData').addEventListener('click', loadFromLocalStorage);
+            document.getElementById('clearAll').addEventListener('click', clearAllData);
+            
+            // 新增服务器相关事件
+            document.getElementById('testConnection').addEventListener('click', testServerConnection);
+            document.getElementById('syncData').addEventListener('click', syncToServer);
+            document.getElementById('submitAll').addEventListener('click', submitAllToServer);
+            document.getElementById('showConfig').addEventListener('click', showModal);
+            document.getElementById('saveConfig').addEventListener('click', saveConfig);
+            document.getElementById('closeModal').addEventListener('click', hideModal);
+            document.getElementById('cancelConfig').addEventListener('click', hideModal);
+            
+            // 点击模态框外部关闭
+            document.getElementById('configModal').addEventListener('click', function(e) {
+                if (e.target === this) hideModal();
+            });
+            
+            // 添加触摸事件支持
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(1px)';
+                });
+                
+                btn.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+        
+        // 显示模态框
+        function showModal() {
+            document.getElementById('configModal').style.display = 'block';
+        }
+        
+        // 隐藏模态框
+        function hideModal() {
+            document.getElementById('configModal').style.display = 'none';
+        }
+        
+        // 添加日志
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = {
+                timestamp,
+                message,
+                type
+            };
+            
+            operationLogs.unshift(logEntry);
+            if (operationLogs.length > 50) operationLogs.pop();
+            
+            // 更新显示
+            updateLogDisplay();
+        }
+        
+        // 更新日志显示
+        function updateLogDisplay() {
+            const logContent = document.getElementById('logContent');
+            logContent.innerHTML = '';
+            
+            operationLogs.forEach(log => {
+                const logDiv = document.createElement('div');
+                logDiv.className = `log-entry log-${log.type}`;
+                logDiv.textContent = `[${log.timestamp}] ${log.message}`;
+                logContent.appendChild(logDiv);
+            });
+        }
+        
+        // 测试服务器连接
+        async function testServerConnection() {
+            const serverUrl = document.getElementById('serverUrl').value.trim();
+            if (!serverUrl) {
+                addLog('请输入服务器地址', 'error');
+                return;
+            }
+            
+            updateServerStatus('connecting', '连接中...');
+            addLog(`正在连接到服务器: ${serverUrl}`, 'info');
+            
+            // 创建AbortController用于超时控制
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), (serverConfig.timeout || 30) * 1000);
+            
+            try {
+                // 尝试连接根路径
+                const testUrl = `${serverUrl}`;
+                const response = await fetch(testUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+                
+                if (response.ok) {
+                    serverConnected = true;
+                    updateServerStatus('connected', '连接成功');
+                    enableServerButtons();
+                    addLog('服务器连接成功', 'success');
+                    
+                    // 更新服务器信息
+                    document.getElementById('connectionInfo').innerHTML = 
+                        `<i class="fas fa-check-circle"></i> 连接正常 | 服务器地址: ${serverUrl}`;
+                    
+                    // 保存配置
+                    localStorage.setItem('donationServerConfigMobile', JSON.stringify(serverConfig));
+                    
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                // 清除之前的超时计时器
+                clearTimeout(timeoutId);
+                
+                // 如果根路径失败，尝试连接健康检查端点
+                const healthController = new AbortController();
+                const healthTimeoutId = setTimeout(() => healthController.abort(), (serverConfig.timeout || 30) * 1000);
+                
+                try {
+                    const healthUrl = `${serverUrl}/health`;
+                    const response = await fetch(healthUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        signal: healthController.signal
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        serverConnected = true;
+                        updateServerStatus('connected', `已连接 (${data.status || '健康'})`);
+                        enableServerButtons();
+                        addLog('服务器连接成功', 'success');
+                        
+                        document.getElementById('connectionInfo').innerHTML = 
+                            `<i class="fas fa-check-circle"></i> 连接正常 | 服务器状态: ${data.status || '健康'}`;
+                        
+                        // 保存配置
+                        localStorage.setItem('donationServerConfigMobile', JSON.stringify(serverConfig));
+                        
+                    } else {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                } catch (secondError) {
+                    serverConnected = false;
+                    updateServerStatus('disconnected', `连接失败: ${secondError.name === 'AbortError' ? '请求超时' : secondError.message}`);
+                    disableServerButtons();
+                    addLog(`服务器连接失败: ${secondError.name === 'AbortError' ? '请求超时' : secondError.message}`, 'error');
+                    
+                    document.getElementById('connectionInfo').innerHTML = 
+                        `<i class="fas fa-times-circle"></i> 连接失败: ${secondError.name === 'AbortError' ? '请求超时' : secondError.message}`;
+                } finally {
+                    clearTimeout(healthTimeoutId);
+                }
+            } finally {
+                clearTimeout(timeoutId);
+            }
+        }
+        
+        // 更新服务器状态显示
+        function updateServerStatus(status, message) {
+            const statusElement = document.getElementById('serverStatus');
+            statusElement.className = `server-status status-${status}`;
+            
+            const icon = status === 'connected' ? 'fa-check-circle' : 
+                        status === 'connecting' ? 'fa-sync fa-spin' : 'fa-times-circle';
+            
+            statusElement.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+        }
+        
+        // 启用服务器相关按钮
+        function enableServerButtons() {
+            document.getElementById('syncData').disabled = false;
+            document.getElementById('submitAll').disabled = false;
+            document.getElementById('syncData').innerHTML = '<i class="fas fa-sync-alt"></i> 同步到服务器';
+        }
+        
+        // 禁用服务器相关按钮
+        function disableServerButtons() {
+            document.getElementById('syncData').disabled = true;
+            document.getElementById('submitAll').disabled = true;
+        }
+        
+        // 同步数据到服务器（只同步未提交的数据）
+        async function syncToServer() {
+            if (!serverConnected) {
+                addLog('服务器未连接，无法同步', 'error');
+                return;
+            }
+            
+            if (syncInProgress) {
+                addLog('已有同步操作在进行中', 'warning');
+                return;
+            }
+            
+            syncInProgress = true;
+            document.getElementById('syncData').innerHTML = '<i class="fas fa-spinner fa-spin"></i> 同步中...';
+            
+            // 创建AbortController用于超时控制
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), (serverConfig.timeout || 30) * 1000);
+            
+            try {
+                // 获取所有数据
+                const allData = getAllData();
+                if (allData.length === 0) {
+                    addLog('没有需要同步的数据', 'info');
+                    updateSyncDetails('暂无数据可同步');
+                    return;
+                }
+                
+                // 获取已提交的数据ID（如果有）
+                const submittedIds = JSON.parse(localStorage.getItem('submittedIdsMobile') || '[]');
+                
+                // 筛选未提交的数据
+                const dataToSubmit = allData.filter(item => !submittedIds.includes(item.localId));
+                
+                if (dataToSubmit.length === 0) {
+                    addLog('所有数据已同步，无需重复提交', 'info');
+                    updateSyncDetails('所有数据已同步');
+                    return;
+                }
+                
+                addLog(`准备提交 ${dataToSubmit.length} 条未同步数据`, 'info');
+                updateSyncDetails(`准备同步 ${dataToSubmit.length} 条数据...`);
+                
+                // 提交数据
+                const result = await submitDataToServer(dataToSubmit, controller);
+                
+                if (result && result.success) {
+                    // 更新已提交的ID
+                    const newIds = dataToSubmit.map(item => item.localId);
+                    const updatedSubmittedIds = [...submittedIds, ...newIds];
+                    localStorage.setItem('submittedIdsMobile', JSON.stringify(updatedSubmittedIds));
+                    
+                    // 更新同步状态
+                    updateSyncStatus(`${result.submittedCount || dataToSubmit.length}条数据已同步`);
+                    updateSyncDetails(`成功同步 ${result.submittedCount || dataToSubmit.length} 条数据到服务器`, 'success');
+                    addLog(`成功同步 ${result.submittedCount || dataToSubmit.length} 条数据到服务器`, 'success');
+                    
+                    if (result.failedCount > 0) {
+                        addLog(`${result.failedCount} 条数据同步失败，请检查`, 'error');
+                        updateSyncDetails(`${result.failedCount} 条数据同步失败`, 'error');
+                    }
+                } else {
+                    throw new Error(result?.message || '同步失败，服务器返回异常');
+                }
+                
+            } catch (error) {
+                addLog(`同步失败: ${error.name === 'AbortError' ? '请求超时' : error.message}`, 'error');
+                updateSyncStatus('同步失败');
+                updateSyncDetails(`同步失败: ${error.name === 'AbortError' ? '请求超时' : error.message}`, 'error');
+            } finally {
+                syncInProgress = false;
+                clearTimeout(timeoutId);
+                document.getElementById('syncData').innerHTML = '<i class="fas fa-sync-alt"></i> 同步到服务器';
+            }
+        }
+        
+        // 提交所有数据到服务器（强制提交）
+        async function submitAllToServer() {
+            if (!serverConnected) {
+                addLog('服务器未连接，无法提交', 'error');
+                return;
+            }
+            
+            if (!confirm('确定要提交所有数据到服务器吗？这将会覆盖服务器上的现有数据。')) {
+                return;
+            }
+            
+            syncInProgress = true;
+            document.getElementById('submitAll').innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中...';
+            
+            // 创建AbortController用于超时控制
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), (serverConfig.timeout || 30) * 1000);
+            
+            try {
+                const allData = getAllData();
+                if (allData.length === 0) {
+                    addLog('没有数据可提交', 'info');
+                    updateSyncDetails('暂无数据可提交');
+                    return;
+                }
+                
+                addLog(`准备提交全部 ${allData.length} 条数据`, 'info');
+                updateSyncDetails(`准备提交 ${allData.length} 条数据...`);
+                
+                // 使用批量提交接口
+                const result = await submitBatchToServer(allData, controller);
+                
+                if (result && result.success) {
+                    // 清除本地已提交ID记录，重新记录
+                    const submittedIds = allData.map(item => item.localId);
+                    localStorage.setItem('submittedIdsMobile', JSON.stringify(submittedIds));
+                    
+                    updateSyncStatus(`已提交${result.submittedCount || allData.length}条数据`);
+                    updateSyncDetails(`成功提交 ${result.submittedCount || allData.length} 条数据到服务器`, 'success');
+                    addLog(`成功提交 ${result.submittedCount || allData.length} 条数据到服务器`, 'success');
+                    
+                    if (result.failedCount > 0) {
+                        addLog(`${result.failedCount} 条数据提交失败`, 'error');
+                        updateSyncDetails(`${result.failedCount} 条数据提交失败`, 'error');
+                    }
+                } else {
+                    throw new Error(result?.message || '提交失败，服务器返回异常');
+                }
+                
+            } catch (error) {
+                addLog(`提交失败: ${error.name === 'AbortError' ? '请求超时' : error.message}`, 'error');
+                updateSyncStatus('提交失败');
+                updateSyncDetails(`提交失败: ${error.name === 'AbortError' ? '请求超时' : error.message}`, 'error');
+            } finally {
+                syncInProgress = false;
+                clearTimeout(timeoutId);
+                document.getElementById('submitAll').innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 提交所有数据';
+            }
+        }
+        
+        // 提交数据到服务器（单个或批量）
+        async function submitDataToServer(data, controller) {
+            const serverUrl = serverConfig.serverUrl;
+            const apiEndpoint = serverConfig.apiEndpoints.submit;
+            const url = `${serverUrl}${apiEndpoint}`;
+            
+            try {
+                // 为每条数据生成唯一ID和时间戳
+                const dataWithMetadata = data.map(item => ({
+                    ...item,
+                    localId: item.localId || generateLocalId(),
+                    submitTime: new Date().toISOString(),
+                    deviceId: getDeviceId(),
+                    syncVersion: '1.0'
+                }));
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        data: dataWithMetadata,
+                        batchId: generateBatchId(),
+                        timestamp: new Date().toISOString(),
+                        deviceId: getDeviceId()
+                    }),
+                    signal: controller ? controller.signal : null
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                return result;
+                
+            } catch (error) {
+                // 重试逻辑
+                for (let i = 0; i < (serverConfig.retryCount || 3); i++) {
+                    addLog(`第${i + 1}次重试...`, 'info');
+                    try {
+                        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                        
+                        // 创建新的AbortController用于重试
+                        const retryController = new AbortController();
+                        const retryTimeoutId = setTimeout(() => retryController.abort(), (serverConfig.timeout || 30) * 1000);
+                        
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                data, 
+                                batchId: generateBatchId(),
+                                retryAttempt: i + 1 
+                            }),
+                            signal: retryController.signal
+                        });
+                        
+                        clearTimeout(retryTimeoutId);
+                        
+                        if (response.ok) {
+                            return await response.json();
+                        }
+                    } catch (retryError) {
+                        if (i === (serverConfig.retryCount || 3) - 1) {
+                            throw error;
+                        }
+                    }
+                }
+                throw error;
+            }
+        }
+        
+        // 批量提交数据
+        async function submitBatchToServer(data, controller) {
+            return submitDataToServer(data, controller);
+        }
+        
+        // 获取所有表单数据
+        function getAllData() {
+            const tableData = [];
+            const formCards = document.querySelectorAll('.form-card');
+            
+            formCards.forEach((card, index) => {
+                const name = card.querySelector('.name-input').value.trim();
+                const project = card.querySelector('.project-select').value;
+                const method = card.querySelector('.method-textarea').value;
+                const amount = card.querySelector('.amount-display').textContent;
+                const content = card.querySelector('.content-textarea').value.trim();
+                const payment = card.querySelector('.payment-select').value;
+                const contact = card.querySelector('.contact-input').value.trim();
+                
+                if (name && project) {
+                    tableData.push({
+                        name,
+                        project,
+                        method,
+                        amount,
+                        content,
+                        payment,
+                        contact,
+                        amountTWD: extractAmountTWD(amount),
+                        amountRMB: extractAmountRMB(amount),
+                        localId: card.dataset.id || generateLocalId(),
+                        createTime: new Date().toISOString(),
+                        rowIndex: index + 1
+                    });
+                }
+            });
+            
+            return tableData;
+        }
+        
+        // 从金额字符串中提取新台币数值
+        function extractAmountTWD(amountStr) {
+            if (amountStr === '随喜' || amountStr === '-') return 0;
+            const match = amountStr.match(/NT\$\s*([\d,]+)/);
+            return match ? parseInt(match[1].replace(/,/g, '')) : 0;
+        }
+        
+        // 从金额字符串中提取人民币数值
+        function extractAmountRMB(amountStr) {
+            if (amountStr === '随喜' || amountStr === '-') return 0;
+            const match = amountStr.match(/¥\s*([\d,.]+)/);
+            if (match) {
+                return parseFloat(match[1].replace(/,/g, ''));
+            }
+            // 如果没有人民币金额，尝试从新台币金额计算
+            const twdMatch = amountStr.match(/NT\$\s*([\d,.]+)/);
+            if (twdMatch) {
+                const twdAmount = parseInt(twdMatch[1].replace(/,/g, ''));
+                return twdAmount / EXCHANGE_RATE;
+            }
+            return 0;
+        }
+        
+        // 生成本地ID
+        function generateLocalId() {
+            return `mobile_${new Date().getTime()}_${Math.random().toString(36).substr(2, 9)}`;
+        }
+        
+        // 生成批次ID
+        function generateBatchId() {
+            return `mobile_batch_${new Date().getTime()}_${Math.random().toString(36).substr(2, 9)}`;
+        }
+        
+        // 获取设备ID
+        function getDeviceId() {
+            let deviceId = localStorage.getItem('deviceIdMobile');
+            if (!deviceId) {
+                deviceId = `mobile_device_${new Date().getTime()}_${Math.random().toString(36).substr(2, 9)}`;
+                localStorage.setItem('deviceIdMobile', deviceId);
+            }
+            return deviceId;
+        }
+        
+        // 更新同步状态显示
+        function updateSyncStatus(status) {
+            document.getElementById('syncStatus').textContent = status;
+        }
+        
+        // 更新同步详情
+        function updateSyncDetails(message, type = 'info') {
+            const detailsElement = document.getElementById('syncDetails');
+            detailsElement.textContent = message;
+            detailsElement.className = `sync-status log-${type}`;
+        }
+        
+        // 初始化表单
+        function initializeForms() {
+            const formContainer = document.getElementById('formContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            // 隐藏空状态
+            emptyState.style.display = 'none';
+            
+            // 添加第一个表单
+            addNewForm();
+            
+            addLog('手机版表单初始化完成', 'info');
+        }
+        
+        // 添加新表单
+        function addNewForm() {
+            const formContainer = document.getElementById('formContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            // 隐藏空状态
+            emptyState.style.display = 'none';
+            
+            const formCount = document.querySelectorAll('.form-card').length + 1;
+            const localId = generateLocalId();
+            
+            // 生成项目选项
+            const projectOptions = Object.keys(projectData).map(project => 
+                `<option value="${project}">${project}</option>`
+            ).join('');
+            
+            const formCard = document.createElement('div');
+            formCard.className = 'form-card';
+            formCard.dataset.id = localId;
+            formCard.innerHTML = `
+                <div class="form-card-header">
+                    <div class="form-card-title">记录 #${formCount}</div>
+                    <button class="delete-card-btn delete-form" title="删除此记录">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <label class="form-label required">姓名</label>
+                    <input type="text" class="form-input name-input" placeholder="请输入姓名" required>
+                </div>
+                <div class="form-row">
+                    <label class="form-label required">护持项目</label>
+                    <select class="form-input project-select" required>
+                        <option value="">请选择护持项目</option>
+                        ${projectOptions}
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">祈福方式</label>
+                    <textarea class="form-input method-textarea" readonly></textarea>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">护持金额</label>
+                    <div class="amount-display">-</div>
+                    <div class="rmb-display">-</div>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">祈福内容</label>
+                    <textarea class="form-input content-textarea" placeholder="请输入祈福内容"></textarea>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">是否缴费</label>
+                    <select class="form-input payment-select">
+                        <option value="未缴费">未缴费</option>
+                        <option value="已缴费">已缴费</option>
+                        <option value="随喜">随喜</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">联系人</label>
+                    <input type="text" class="form-input contact-input" placeholder="请输入联系人">
+                </div>
+            `;
+            
+            formContainer.appendChild(formCard);
+            
+            // 绑定事件
+            bindFormEvents(formCard);
+            
+            // 更新表单标题
+            updateFormTitles();
+            updateSummary();
+            addLog(`添加了新记录 (当前共${formCount}条)`, 'info');
+            
+            // 滚动到新表单
+            setTimeout(() => {
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+        
+        // 绑定表单事件
+        function bindFormEvents(formCard) {
+            const projectSelect = formCard.querySelector('.project-select');
+            const deleteBtn = formCard.querySelector('.delete-form');
+            
+            projectSelect.addEventListener('change', function() {
+                updateFormData(this);
+            });
+            
+            deleteBtn.addEventListener('click', function() {
+                deleteForm(this);
+            });
+            
+            // 添加输入事件监听，实时更新统计
+            const nameInput = formCard.querySelector('.name-input');
+            nameInput.addEventListener('input', updateSummary);
+        }
+        
+        // 更新表单标题
+        function updateFormTitles() {
+            const formCards = document.querySelectorAll('.form-card');
+            formCards.forEach((card, index) => {
+                const titleElement = card.querySelector('.form-card-title');
+                if (titleElement) {
+                    titleElement.textContent = `记录 #${index + 1}`;
+                }
+            });
+        }
+        
+        // 更新表单数据（根据选择的护持项目）
+        function updateFormData(selectElement) {
+            const formCard = selectElement.closest('.form-card');
+            const project = selectElement.value;
+            
+            if (project && projectData[project]) {
+                const methodTextarea = formCard.querySelector('.method-textarea');
+                const amountDisplay = formCard.querySelector('.amount-display');
+                const rmbDisplay = formCard.querySelector('.rmb-display');
+                
+                // 更新祈福方式
+                methodTextarea.value = projectData[project].method;
+                
+                // 更新金额显示
+                if (projectData[project].amount === "随喜") {
+                    amountDisplay.textContent = "随喜";
+                    if (rmbDisplay) rmbDisplay.textContent = "随喜";
+                } else {
+                    const amountTWD = parseInt(projectData[project].amount);
+                    const amountRMB = amountTWD / EXCHANGE_RATE;
+                    
+                    amountDisplay.textContent = `NT$ ${amountTWD.toLocaleString()}`;
+                    if (rmbDisplay) {
+                        rmbDisplay.textContent = `≈ ¥ ${amountRMB.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}`;
+                    }
+                }
+                
+                addLog(`已选择项目: ${project}`, 'info');
+            } else {
+                // 清空数据
+                formCard.querySelector('.method-textarea').value = '';
+                formCard.querySelector('.amount-display').textContent = '-';
+                const rmbDisplay = formCard.querySelector('.rmb-display');
+                if (rmbDisplay) rmbDisplay.textContent = '-';
+            }
+            
+            updateSummary();
+        }
+        
+        // 删除表单
+        function deleteForm(buttonElement) {
+            const formCard = buttonElement.closest('.form-card');
+            const formContainer = document.getElementById('formContainer');
+            const formCards = document.querySelectorAll('.form-card');
+            
+            // 至少保留一个表单
+            if (formCards.length > 1) {
+                formCard.remove();
+                updateFormTitles();
+                updateSummary();
+                addLog('删除了一条记录', 'info');
+            } else {
+                // 如果是最后一个表单，清空内容而不是删除
+                const emptyState = document.getElementById('emptyState');
+                emptyState.style.display = 'block';
+                formCard.style.display = 'none';
+                updateSummary();
+                addLog('清空了最后一条记录', 'info');
+            }
+            
+            // 如果所有表单都被删除/隐藏，显示空状态
+            const visibleForms = document.querySelectorAll('.form-card[style*="display: none"]');
+            if (visibleForms.length === formCards.length) {
+                const emptyState = document.getElementById('emptyState');
+                emptyState.style.display = 'block';
+            }
+        }
+        
+        // 更新数据统计
+        function updateSummary() {
+            const allData = getAllData();
+            let totalRecords = allData.length;
+            let totalAmountTWD = 0;
+            
+            allData.forEach(item => {
+                if (item.amountTWD) {
+                    totalAmountTWD += item.amountTWD;
+                }
+            });
+            
+            document.getElementById('totalRecords').textContent = totalRecords;
+            document.getElementById('totalAmountTWD').textContent = `NT$ ${totalAmountTWD.toLocaleString()}`;
+            document.getElementById('totalAmountRMB').textContent = `¥ ${(totalAmountTWD / EXCHANGE_RATE).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}`;
+            
+            // 更新空状态显示
+            const emptyState = document.getElementById('emptyState');
+            const formCards = document.querySelectorAll('.form-card');
+            const visibleForms = Array.from(formCards).filter(card => card.style.display !== 'none');
+            
+            if (visibleForms.length === 0 && formCards.length > 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+        
+        // 保存数据到本地存储
+        function saveToLocalStorage() {
+            const tableData = getAllData();
+            
+            if (tableData.length === 0) {
+                alert('没有有效数据可以保存！请至少填写一行完整的姓名和护持项目。');
+                addLog('保存失败：无有效数据', 'error');
+                return;
+            }
+            
+            try {
+                localStorage.setItem('donationDataMobile', JSON.stringify(tableData));
+                const msg = `成功保存 ${tableData.length} 条记录到本地存储！`;
+                alert(msg);
+                addLog(msg, 'success');
+            } catch (e) {
+                const errorMsg = '保存数据失败，可能存储空间不足：' + e.message;
+                alert(errorMsg);
+                addLog(errorMsg, 'error');
+            }
+        }
+        
+        // 从本地存储加载数据
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('donationDataMobile');
+            
+            if (!savedData) {
+                alert('本地存储中没有找到保存的数据！');
+                addLog('加载失败：本地无保存的数据', 'error');
+                return;
+            }
+            
+            if (!confirm('加载本地数据将替换当前表格中的所有数据，确定要加载吗？')) {
+                return;
+            }
+            
+            try {
+                const tableData = JSON.parse(savedData);
+                const formContainer = document.getElementById('formContainer');
+                const emptyState = document.getElementById('emptyState');
+                
+                // 清空当前表单
+                formContainer.innerHTML = '';
+                emptyState.style.display = 'none';
+                
+                // 加载保存的数据
+                tableData.forEach((item, index) => {
+                    addNewForm();
+                    const newForm = document.querySelector('.form-card:last-child');
+                    populateForm(newForm, item);
+                });
+                
+                updateFormTitles();
+                updateSummary();
+                const msg = `成功加载 ${tableData.length} 条记录！`;
+                alert(msg);
+                addLog(msg, 'success');
+            } catch (e) {
+                const errorMsg = '加载数据失败，数据可能已损坏：' + e.message;
+                alert(errorMsg);
+                addLog(errorMsg, 'error');
+            }
+        }
+        
+        // 填充表单数据
+        function populateForm(form, data) {
+            if (data.name) form.querySelector('.name-input').value = data.name;
+            
+            const projectSelect = form.querySelector('.project-select');
+            if (data.project) {
+                projectSelect.value = data.project;
+                
+                // 触发change事件以更新其他字段
+                const event = new Event('change');
+                projectSelect.dispatchEvent(event);
+            }
+            
+            if (data.content) form.querySelector('.content-textarea').value = data.content;
+            if (data.payment) form.querySelector('.payment-select').value = data.payment;
+            if (data.contact) form.querySelector('.contact-input').value = data.contact;
+        }
+        
+        // 导出为CSV文件
+        function exportToCSV() {
+            const tableData = getAllData();
+            
+            if (tableData.length === 0) {
+                alert('没有有效数据可以导出！请至少填写一行完整的姓名和护持项目。');
+                addLog('导出失败：无有效数据', 'error');
+                return;
+            }
+            
+            try {
+                // 创建CSV内容
+                let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+                csvContent += "序号,姓名,护持项目,祈福方式,护持金额(新台币),护持金额(人民币),祈福内容,是否缴费,联系人,创建时间,本地ID\n";
+                
+                tableData.forEach(item => {
+                    const row = [
+                        `"${item.rowIndex}"`,
+                        `"${item.name}"`,
+                        `"${item.project}"`,
+                        `"${item.method.replace(/\n/g, '; ')}"`,
+                        `"${item.amountTWD}"`,
+                        `"${item.amountRMB.toFixed(2)}"`,
+                        `"${item.content}"`,
+                        `"${item.payment}"`,
+                        `"${item.contact}"`,
+                        `"${item.createTime}"`,
+                        `"${item.localId}"`
+                    ];
+                    csvContent += row.join(',') + "\n";
+                });
+                
+                // 创建下载链接
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                const timestamp = new Date().toISOString().slice(0,10).replace(/-/g, '');
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", `护持项目收集表_手机版_${timestamp}_${tableData.length}条.csv`);
+                document.body.appendChild(link);
+                
+                // 触发下载
+                link.click();
+                document.body.removeChild(link);
+                
+                const msg = `成功导出 ${tableData.length} 条记录到CSV文件！`;
+                alert(msg);
+                addLog(msg, 'success');
+            } catch (e) {
+                const errorMsg = '导出CSV文件失败：' + e.message;
+                alert(errorMsg);
+                addLog(errorMsg, 'error');
+            }
+        }
+        
+        // 清空所有数据
+        function clearAllData() {
+            if (!confirm('确定要清空所有数据吗？此操作不可撤销。')) {
+                return;
+            }
+            
+            // 清空本地存储
+            localStorage.removeItem('donationDataMobile');
+            localStorage.removeItem('submittedIdsMobile');
+            
+            // 重置表单
+            const formContainer = document.getElementById('formContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            formContainer.innerHTML = '';
+            emptyState.style.display = 'block';
+            
+            // 添加一个空表单
+            addNewForm();
+            
+            updateSummary();
+            updateSyncStatus('未同步');
+            updateSyncDetails('');
+            
+            const msg = '所有数据已清空！';
+            alert(msg);
+            addLog(msg, 'info');
+        }
+    </script>
+</body>
+</html>
