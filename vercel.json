@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "public/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "server/server.js",
       "use": "@vercel/node"
     }
@@ -25,6 +29,11 @@
     {
       "src": "/",
       "dest": "server/server.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "public/$1",
       "methods": ["GET"]
     }
   ],
