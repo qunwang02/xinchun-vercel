@@ -83,6 +83,11 @@ class Database {
   users() {
     return this.getCollection('users');
   }
+  
+  // ✅ 新增：获取配置集合
+  configs() {
+    return this.getCollection('configs');
+  }
 }
 
 // 创建单例实例
