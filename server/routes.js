@@ -4,6 +4,46 @@ const database = require('./database');
 const config = require('./config');
 const { ObjectId } = require('mongodb');
 
+// ============ 内联默认活动配置 ============
+// ⭐ 保证 API 永远返回项目数据，不依赖数据库或文件系统
+const DEFAULT_CONFIG = {
+  exchangeRate: 4.2,
+  projects: {
+    "供灯祈福(总功德主)": {
+      method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 三盏\n3.附 常年光明灯 三盏",
+      amount: "300000"
+    },
+    "供灯祈福(副总功德主)": {
+      method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 二盏\n3.附 常年光明灯 二盏",
+      amount: "80000"
+    },
+    "供灯祈福(圆满功德主)": {
+      method: "1.供灯祈福共修 (七天)\n2.附 福慧灯 一盏\n3.附 常年光明灯 一盏",
+      amount: "50000"
+    },
+    "供灯祈福(阖家福慧功德主)": {
+      method: "1.供灯祈福共修 (七天)\n2.附 常年光明灯 一盏",
+      amount: "8000"
+    },
+    "供灯祈福(个人福慧功德主)": {
+      method: "1.供灯祈福共修 (七天)\n2.附 常年光明灯 一盏",
+      amount: "6000"
+    },
+    "常年光明灯（阖家光明灯功德主）": {
+      method: "佛龛供灯一年",
+      amount: "1000"
+    },
+    "常年光明灯(个人光明灯功德主)": {
+      method: "佛龛供灯一年",
+      amount: "600"
+    },
+    "新春祈福单(随喜功德主)": {
+      method: "祈福共修 (三天)",
+      amount: "随喜"
+    }
+  }
+};
+
 // ============ 健康检查 ============
 router.get('/health', async (req, res) => {
   try {
@@ -58,27 +98,27 @@ router.get('/api/config', async (req, res) => {
     await database.connect();
     const doc = await database.configs().findOne({ _id: 'project_config' });
 
-    // 数据库没有则从默认JSON读取
-    let configData = doc;
-    if (!configData) {
-      const fs = require('fs');
-      const path = require('path');
-      const fallbackPath = path.join(__dirname, '../public/config-data.json');
-      try {
-        configData = JSON.parse(fs.readFileSync(fallbackPath, 'utf-8'));
-        // 写入数据库作为初始值
-        await database.configs().updateOne(
-          { _id: 'project_config' },
-          { $set: { ...configData, _id: 'project_config', updatedAt: new Date() } },
-          { upsert: true }
-        );
-      } catch (e) {
-        configData = { exchangeRate: 4.2, projects: {} };
-      }
+    // ⭐ 关键：数据库里有配置，且 projects 不为空，才用数据库的
+    if (doc && doc.projects && Object.keys(doc.projects).length > 0) {
+      return res.json({ success: true, config: doc });
     }
-    res.json({ success: true, config: configData });
+
+    // 数据库没有 or 数据库的 projects 是空的 → 用内联默认配置并回写数据库
+    try {
+      await database.configs().updateOne(
+        { _id: 'project_config' },
+        { $set: { ...DEFAULT_CONFIG, _id: 'project_config', updatedAt: new Date() } },
+        { upsert: true }
+      );
+    } catch (writeErr) {
+      console.warn('写入默认配置失败:', writeErr.message);
+    }
+
+    res.json({ success: true, config: DEFAULT_CONFIG });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    console.error('获取配置错误，返回默认配置:', error.message);
+    // ⭐ 即使数据库完全挂了也返回默认配置，保证前端可用
+    res.json({ success: true, config: DEFAULT_CONFIG });
   }
 });
 
