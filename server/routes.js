@@ -57,16 +57,28 @@ router.get('/api/config', async (req, res) => {
   try {
     await database.connect();
     const doc = await database.configs().findOne({ _id: 'project_config' });
-    if (doc) return res.json({ success: true, config: doc });
-    await database.configs().updateOne(
-      { _id: 'project_config' },
-      { $set: { ...DEFAULT_CONFIG, _id: 'project_config', updatedAt: new Date() } },
-      { upsert: true }
-    );
-    res.json({ success: true, config: DEFAULT_CONFIG });
+
+    // 数据库没有则从默认JSON读取
+    let configData = doc;
+    if (!configData) {
+      const fs = require('fs');
+      const path = require('path');
+      const fallbackPath = path.join(__dirname, '../public/config-data.json');
+      try {
+        configData = JSON.parse(fs.readFileSync(fallbackPath, 'utf-8'));
+        // 写入数据库作为初始值
+        await database.configs().updateOne(
+          { _id: 'project_config' },
+          { $set: { ...configData, _id: 'project_config', updatedAt: new Date() } },
+          { upsert: true }
+        );
+      } catch (e) {
+        configData = { exchangeRate: 4.2, projects: {} };
+      }
+    }
+    res.json({ success: true, config: configData });
   } catch (error) {
-    console.error('获取配置错误，返回默认配置:', error);
-    res.json({ success: true, config: DEFAULT_CONFIG });  // ← 关键：catch 也返回成功
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
